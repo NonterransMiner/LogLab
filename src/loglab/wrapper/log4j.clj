@@ -1,21 +1,18 @@
-(ns loglab.gen.log4j
+(ns loglab.wrapper.log4j
   (:import (org.apache.logging.log4j LogManager Logger)
-           (clojure.lang Keyword)))
+           (clojure.lang Keyword)
+           (org.apache.logging.log4j.core.config ConfigurationFactory)
+           (org.apache.logging.log4j.core.config.xml XmlConfigurationFactory)))
 
-;(defn config-with-xml
-;  "Config log4j 2 with XML configurations."
-;  [^String path]
-;  (DOMConfigurator/configure path))
-
-;(defn config-with-default
-;  "Config log4j 2 with default configurations, as a wrapper of BasicConfigurator.configure"
-;  []
-;  (BasicConfigurator/configure))
-
-(defn new-logger
+(defn get-logger
   "A wrapper of Logger.getLogger"
   [^String name]
   (LogManager/getLogger name))
+
+(defn get-formatter-logger
+  "A wrapper of Logger.getFormatterLogger"
+  [^String name]
+  (LogManager/getFormatterLogger name))
 
 (defn log
   [logger level msg]
