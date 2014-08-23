@@ -1,6 +1,6 @@
 (ns loglab.wrapper.log4j
   (:import (org.apache.logging.log4j LogManager Logger)
-           (clojure.lang Keyword)
+           (clojure.lang Keyword IPersistentMap)
            (org.apache.logging.log4j.core.config ConfigurationFactory)
            (org.apache.logging.log4j.core.config.xml XmlConfigurationFactory)))
 
@@ -25,5 +25,6 @@
 
 (defn wrap-logger
   [^Logger target]
-  (fn [^Keyword level msg]
-    (log target level msg)))
+  (fn
+    ([{:keys [level msg]}]
+     (log target level msg))))

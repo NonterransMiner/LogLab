@@ -16,5 +16,5 @@
 
 (defn wrap-logger
   [^Logger target]
-  (fn [^Keyword level msg]
+  (fn [{:keys [level msg]}]
     (log target level msg)))
